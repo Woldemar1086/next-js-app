@@ -1,0 +1,10 @@
+.tableProductsContainer {
+    width: 40%;
+    margin: 10px;
+}
+
+.tableProductsPanel {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
