@@ -1,0 +1,23 @@
+.productItemContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid grey;
+    margin-top: -1px;
+    margin-left: -1px;
+}
+
+.productItemName{
+    width: 85%;
+    padding: 5px;
+}
+
+.productItemPrice {
+    display: flex;
+    width: 15%;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgray;
+    padding: 2px;
+}
