@@ -1,0 +1,32 @@
+.basketTableContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.basketTableTotalPriceContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.basketTableTotalPrice {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.basketTableTotalPriceInfo {
+    color: grey;
+    margin-right: 5px;
+}
+
+.basketTableTotalPriceValue {
+    color: #ff7853
+}
