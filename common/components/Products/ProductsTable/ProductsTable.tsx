@@ -8,11 +8,12 @@ import ProductItemModel from '../../../../models/Products/ProductItemModel';
 const { Panel } = Collapse;
 
 type Props = {
-    onSelectItem: (item: ProductItemModel) => void
+    onSelectItem: (item: ProductItemModel) => void,
+    selectedItems: ProductItemModel[]
 }
 
 const ProductsTable: React.FC<Props> = (props: Props) => {
-    const { onSelectItem } = props;
+    const { onSelectItem, selectedItems } = props;
     const [tableData, setTableData] = useState<ProductsTableGroupModel[]>([]);
 
     useEffect(()=>{
@@ -40,7 +41,15 @@ const ProductsTable: React.FC<Props> = (props: Props) => {
                     key={`collapsed-product-table-${i}`}
                 >
                     <Panel className={styles.tableProductsPanel} header={table.groupName} key="1">
-                        {table.items?.map((product, i)=> <ProductItem onItemClick={onSelectItem} key={`product-${product.price}-${i}`} item={product}/>)}
+                        {table.items?.map((product, i)=> {
+                            const isSelected = selectedItems.findIndex(item=>product.name === item.name) !== -1;
+                            return <ProductItem
+                                        onItemClick={onSelectItem}
+                                        key={`product-${product.price}-${i}`}
+                                        item={product}
+                                        isSelected={isSelected}
+                                    />
+                        })}
                     </Panel>
                 </Collapse>
             )}

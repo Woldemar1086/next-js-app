@@ -24,7 +24,7 @@ const Main = () => {
     const onSelectItem = (item: ProductItemModel) => {
         const items = selectedItems.map(item=> ({...item}))
         if(!items.find(selectedItem => selectedItem.name === item.name)) {
-            items.push({...item, ordered: '1'})
+            items.push({...item, ordered: 1})
         }
         saveSelectedItems(items)
     }
@@ -51,7 +51,7 @@ const Main = () => {
     <div className={styles.container}>
       <main className={styles.main}>
           <div className={styles.tablesContainer}>
-              <ProductsTable onSelectItem={onSelectItem}/>
+              <ProductsTable onSelectItem={onSelectItem} selectedItems={selectedItems}/>
           </div>
 
           <div className={styles.tablesContainer}>
