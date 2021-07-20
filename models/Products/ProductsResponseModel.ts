@@ -1,9 +1,9 @@
 import ProductResponseModel from "./ProductResponseModel";
 
 export default interface ProductsResponseModel {
-    "Error":"",
-    "Id":0,
-    "Success":true,
+    "Error": string,
+    "Id": number,
+    "Success": boolean,
     "Value":{
         "Goods": ProductResponseModel[]
     }
