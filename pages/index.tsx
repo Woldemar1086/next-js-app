@@ -19,7 +19,10 @@ const Main = () => {
 
     useEffect(()=> {
         if(isBrowser()) {
-            setSelectedItems(JSON.parse(localStorage.getItem('basketState')))
+            const basketState = JSON.parse(localStorage.getItem('basketState'));
+            if(basketState){
+                setSelectedItems(basketState)
+            }
             const modalState = JSON.parse(localStorage.getItem('modalState'))
             if(!modalState?.closed){
                 setIsModalVisible(true)
@@ -33,8 +36,13 @@ const Main = () => {
     }
 
     const onSelectItem = (item: ProductItemModel) => {
-        const items = selectedItems.map(item=> ({...item}))
-        if(!items.find(selectedItem => selectedItem.name === item.name)) {
+        let items = []
+        if(selectedItems?.length > 0) {
+            items = selectedItems.map(item => ({...item}))
+            if (!items.find(selectedItem => selectedItem.name === item.name)) {
+                items.push({...item, ordered: 1})
+            }
+        } else {
             items.push({...item, ordered: 1})
         }
         saveSelectedItems(items)

@@ -42,7 +42,7 @@ const ProductsTable: React.FC<Props> = (props: Props) => {
                 >
                     <Panel className={styles.tableProductsPanel} header={table.groupName} key="1">
                         {table.items?.map((product, i)=> {
-                            const isSelected = selectedItems.findIndex(item=>product.name === item.name) !== -1;
+                            const isSelected = selectedItems?.length > 0 ? selectedItems.findIndex(item=>product.name === item.name) !== -1 : false;
                             return <ProductItem
                                         onItemClick={onSelectItem}
                                         key={`product-${product.price}-${i}`}

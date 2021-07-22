@@ -39,34 +39,43 @@ const BasketTable: React.FC<Props> = (props: Props) => {
 
     const getTotalPrice = (selectedItems: ProductItemModel[], currencyPrice: number) => {
         let totalPrice = 0;
-        selectedItems.forEach(item=> {
-            const productTotalPrice = item.ordered ? item.ordered*item.price : 0;
-            totalPrice += productTotalPrice
-        })
+        if(selectedItems?.length > 0){
+            selectedItems.forEach(item => {
+                const productTotalPrice = item.ordered ? item.ordered * item.price : 0;
+                totalPrice += productTotalPrice
+            })
 
-        return convertPrice(totalPrice, currencyPrice)
+            totalPrice = convertPrice(totalPrice, currencyPrice)
+        }
+        return totalPrice;
     }
 
     return (
-        <div className={styles.basketTableContainer}>
-            <BasketHeader/>
-            {selectedItems.map((product,i) =>
-                <BasketItem
-                    key={`basket-item-product-${product.price}-${i}`}
-                    onChangeAmount={onChangeAmount}
-                    onDeleteClick={onDeleteClick}
-                    item={product}
-                    dollarPrice={dollarPrice}
-                    lastDollarPrice={prices.lastPrice}
-                />
-            )}
-            <div className={styles.basketTableTotalPriceContainer}>
-                <div className={styles.basketTableTotalPrice}>
-                    <span className={styles.basketTableTotalPriceInfo}>Общая стоимость:</span>
-                    <span className={styles.basketTableTotalPriceValue} style={priceStyles}>{totalPrice.toFixed(2)} руб.</span>
+        <>
+        { selectedItems?.length > 0 &&
+            <div className={styles.basketTableContainer}>
+                <BasketHeader/>
+                {selectedItems.map((product, i) =>
+                    <BasketItem
+                        key={`basket-item-product-${product.price}-${i}`}
+                        onChangeAmount={onChangeAmount}
+                        onDeleteClick={onDeleteClick}
+                        item={product}
+                        dollarPrice={dollarPrice}
+                        lastDollarPrice={prices.lastPrice}
+                    />
+                )}
+                <div className={styles.basketTableTotalPriceContainer}>
+                    <div className={styles.basketTableTotalPrice}>
+                        <span className={styles.basketTableTotalPriceInfo}>Общая стоимость:</span>
+                        <span className={styles.basketTableTotalPriceValue}
+                              style={priceStyles}>{totalPrice.toFixed(2)} руб.</span>
+                    </div>
                 </div>
             </div>
-        </div>)
+        }
+    </>
+    )
 }
 
 
